@@ -11,6 +11,7 @@ import RecordScreen from '../screens/Record';
 import PlusButton from '../components/PlusButton';
 import InboxScreen from '../screens/Inbox';
 import MeScreen from '../screens/Me';
+import QRScanScreen from '../screens/QRScan';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -104,9 +105,18 @@ const AppRoutes: React.FC = () => {
 
 const RootStackScreen: React.FC = () => {
   return (
-    <Stack.Navigator mode="modal" screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Main" component={AppRoutes} />
-      <Stack.Screen name="Record" component={RecordScreen} />
+    <Stack.Navigator mode="card" initialRouteName="Main">
+      <Stack.Screen
+        name="Main"
+        component={AppRoutes}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Record"
+        component={RecordScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen name="QRScan" component={QRScanScreen} />
     </Stack.Navigator>
   );
 };

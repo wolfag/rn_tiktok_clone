@@ -4,9 +4,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Header, Input, Search} from './styles';
 import {Container} from '../commonStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const DiscoverScreen: React.FC = () => {
   const [search, setSearch] = useState('');
+  const navigation = useNavigation();
 
   return (
     <Container color="#fff">
@@ -23,9 +25,15 @@ const DiscoverScreen: React.FC = () => {
             value={search}
             returnKeyType="search"
             onChangeText={setSearch}
+            placeholderTextColor="grey"
           />
         </Search>
-        <Ionicons name="qr-code-outline" size={25} color="black" />
+        <Ionicons
+          name="qr-code-outline"
+          size={25}
+          color="black"
+          onPress={() => navigation.navigate('QRScan')}
+        />
       </Header>
     </Container>
   );

@@ -20,4 +20,5 @@ export const Search = styled.View`
 export const Input = styled.TextInput`
   flex: 1;
   font-size: 16px;
+  padding: 0;
 `;
