@@ -12,6 +12,7 @@ import PlusButton from '../components/PlusButton';
 import InboxScreen from '../screens/Inbox';
 import MeScreen from '../screens/Me';
 import QRScanScreen from '../screens/QRScan';
+import CameraMask from '../components/CameraMask';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -105,7 +106,7 @@ const AppRoutes: React.FC = () => {
 
 const RootStackScreen: React.FC = () => {
   return (
-    <Stack.Navigator mode="card" initialRouteName="Main">
+    <Stack.Navigator mode="card" initialRouteName="Mask">
       <Stack.Screen
         name="Main"
         component={AppRoutes}
@@ -117,6 +118,7 @@ const RootStackScreen: React.FC = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen name="QRScan" component={QRScanScreen} />
+      <Stack.Screen name="Mask" component={CameraMask} />
     </Stack.Navigator>
   );
 };
