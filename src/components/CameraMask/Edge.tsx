@@ -17,7 +17,7 @@ const Edge: React.FC<Props> = ({
   position,
   width = 30,
   height = 30,
-  color = 'red',
+  color = '#fff',
   radius = 0,
   borderWidth = 10,
   isInside = true,
