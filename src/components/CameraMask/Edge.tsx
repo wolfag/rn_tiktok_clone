@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleSheet, View, ViewStyle, OpaqueColorValue} from 'react-native';
 
 type Position = 'Top-Left' | 'Top-Right' | 'Bottom-Left' | 'Bottom-Right';
 
@@ -7,7 +7,7 @@ interface Props {
   position: Position;
   width?: number;
   height?: number;
-  color?: string;
+  color?: string | OpaqueColorValue;
   radius?: number;
   borderWidth?: number;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, ViewStyle, Text} from 'react-native';
+import {OpaqueColorValue, StyleSheet, View} from 'react-native';
 import Mask from './Mask';
-import Edge from './Edge';
+import Rectangle from './Rectangle';
 
 interface Props {
   width?: number;
@@ -9,19 +9,24 @@ interface Props {
   center?: boolean;
   top?: number;
   maskOpacity?: number;
-  maskColor?: string;
+  maskColor?: string | OpaqueColorValue;
   edgeBorderWidth?: number;
   edgeRadius?: number;
   edgeWidth?: number;
   edgeHeight?: number;
-  edgeColor?: string;
+  edgeColor?: string | OpaqueColorValue;
+  orientation?: 'vertical' | 'horizontal';
+  animatedLineDuration?: number;
+  animatedLineColor?: string | OpaqueColorValue;
+  animatedLineWidth?: number;
+  padding?: number;
 }
 
 const CameraMask: React.FC<Props> = ({
   width = 300,
   height = 200,
   center = false,
-  top = 200,
+  top = 100,
   maskOpacity = 0.5,
   maskColor = 'pink',
   edgeBorderWidth = 10,
@@ -29,51 +34,30 @@ const CameraMask: React.FC<Props> = ({
   edgeWidth = 30,
   edgeHeight = 35,
   edgeColor = 'red',
+  orientation = 'vertical',
+  animatedLineDuration = 1000,
+  animatedLineColor = 'green',
+  animatedLineWidth = 5,
+  padding = 40,
 }) => {
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.edgeContainer,
-          {
-            width,
-            height,
-            top: center ? undefined : top,
-          },
-        ]}>
-        <Edge
-          position="Top-Left"
-          width={edgeWidth}
-          height={edgeHeight}
-          color={edgeColor}
-          borderWidth={edgeBorderWidth}
-          radius={edgeRadius}
-        />
-        <Edge
-          position="Top-Right"
-          width={edgeWidth}
-          height={edgeHeight}
-          color={edgeColor}
-          borderWidth={edgeBorderWidth}
-          radius={edgeRadius}
-        />
-        <Edge
-          position="Bottom-Left"
-          width={edgeWidth}
-          height={edgeHeight}
-          color={edgeColor}
-          borderWidth={edgeBorderWidth}
-          radius={edgeRadius}
-        />
-        <Edge
-          position="Bottom-Right"
-          width={edgeWidth}
-          height={edgeHeight}
-          color={edgeColor}
-          borderWidth={edgeBorderWidth}
-          radius={edgeRadius}
-        />
-      </View>
+      <Rectangle
+        width={width}
+        height={height}
+        center={center}
+        top={top}
+        edgeBorderWidth={edgeBorderWidth}
+        edgeRadius={edgeRadius}
+        edgeWidth={edgeWidth}
+        edgeHeight={edgeHeight}
+        edgeColor={edgeColor}
+        lineOrientation={orientation}
+        animatedLineDuration={animatedLineDuration}
+        animatedLineColor={animatedLineColor}
+        animatedLineWidth={animatedLineWidth}
+        padding={padding}
+      />
       <Mask
         height={height}
         width={width}

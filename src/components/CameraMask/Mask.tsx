@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, OpaqueColorValue} from 'react-native';
 
 interface Props {
   width?: number;
@@ -7,7 +7,7 @@ interface Props {
   center?: boolean;
   top?: number;
   opacity?: number;
-  color?: string;
+  color?: string | OpaqueColorValue;
   radius?: number;
 }
 
