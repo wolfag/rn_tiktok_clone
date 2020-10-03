@@ -1,16 +1,17 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
-import BarcodeMask from 'react-native-barcode-mask';
 import {RNCamera} from 'react-native-camera';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {Container} from '../commonStyles';
 import {HeaderButton, MyQRButton, Text} from './styles';
+import CameraMask from '../../components/CameraMask';
 
 const QRScanScreen: React.FC = () => {
   const navigation = useNavigation();
   const cameraRef = useRef(null);
-  const [flashMode, setFlashMode] = useState(RNCamera.Constants.FlashMode.off);
+  const [lightState, setLightState] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -45,28 +46,42 @@ const QRScanScreen: React.FC = () => {
   };
 
   const toggleLight = useCallback(() => {
-    if (flashMode === RNCamera.Constants.FlashMode.off) {
-      setFlashMode(RNCamera.Constants.FlashMode.on);
-    } else {
-      setFlashMode(RNCamera.Constants.FlashMode.off);
-    }
-  }, [flashMode]);
+    setLightState(!lightState);
+  }, [lightState]);
 
   return (
     <Container>
       <TouchableOpacity style={styles.full} onPress={toggleLight}>
         <RNCamera
           ref={cameraRef}
-          flashMode={flashMode}
+          flashMode={
+            lightState
+              ? RNCamera.Constants.FlashMode.on
+              : RNCamera.Constants.FlashMode.off
+          }
           type={RNCamera.Constants.Type.back}
           style={styles.full}
           onBarCodeRead={onBarCodeRead}
         />
-        <BarcodeMask outerMaskOpacity={0.5} lineAnimationDuration={1000} />
-        <View style={styles.description}>
-          <Text>Align QR code in frame to scan</Text>
-          <Text size={15}>Tap to turn light on</Text>
-        </View>
+        <CameraMask
+          center={false}
+          edgeInside={true}
+          caption={
+            <Text style={styles.center}>Align QR code in frame to scan</Text>
+          }
+          insideComponent={
+            <View style={styles.insideComponent}>
+              <Feather
+                name={lightState ? 'zap' : 'zap-off'}
+                color="#fff"
+                size={30}
+              />
+              <Text size={15}>{`Tap to turn light ${
+                lightState ? 'off' : 'on'
+              }`}</Text>
+            </View>
+          }
+        />
         <MyQRButton>
           <Ionicons name="qr-code-outline" size={50} color="#fff" />
           <Text size={20}>My TikCode</Text>
@@ -80,11 +95,13 @@ export default QRScanScreen;
 
 const styles = StyleSheet.create({
   full: {flex: 1},
-  description: {
-    position: 'absolute',
-    top: 100,
-    left: 0,
-    right: 0,
+  insideComponent: {
     alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 1,
+    marginBottom: 20,
+  },
+  center: {
+    textAlign: 'center',
   },
 });
