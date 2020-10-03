@@ -8,6 +8,7 @@ import {
   TransformsStyle,
   View,
   ViewStyle,
+  Text,
 } from 'react-native';
 import Edge from './Edge';
 
@@ -27,9 +28,13 @@ interface Props {
   animatedLineDuration?: number;
   animatedLineColor?: string | OpaqueColorValue;
   padding?: number;
+  insideComponent?: React.Component | React.ReactElement;
+  caption?: string | React.Component | React.ReactElement;
+  edgeInside?: boolean;
 }
 
 const Rectangle: React.FC<Props> = ({
+  insideComponent,
   width = 300,
   height = 200,
   center = true,
@@ -45,6 +50,8 @@ const Rectangle: React.FC<Props> = ({
   animatedLineDuration = 1000,
   animatedLineColor = 'green',
   padding = 50,
+  caption,
+  edgeInside = true,
 }) => {
   const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
 
@@ -143,6 +150,7 @@ const Rectangle: React.FC<Props> = ({
         color={edgeColor}
         borderWidth={edgeBorderWidth}
         radius={edgeRadius}
+        isInside={edgeInside}
       />
       <Edge
         position="Top-Right"
@@ -151,6 +159,7 @@ const Rectangle: React.FC<Props> = ({
         color={edgeColor}
         borderWidth={edgeBorderWidth}
         radius={edgeRadius}
+        isInside={edgeInside}
       />
       <Edge
         position="Bottom-Left"
@@ -159,6 +168,7 @@ const Rectangle: React.FC<Props> = ({
         color={edgeColor}
         borderWidth={edgeBorderWidth}
         radius={edgeRadius}
+        isInside={edgeInside}
       />
       <Edge
         position="Bottom-Right"
@@ -167,10 +177,20 @@ const Rectangle: React.FC<Props> = ({
         color={edgeColor}
         borderWidth={edgeBorderWidth}
         radius={edgeRadius}
+        isInside={edgeInside}
       />
       {showAnimatedLine && (
-        <Animated.View style={[styles.animatedLine, animatedLineStyle]} />
+        <View style={styles.animatedLineContainer}>
+          <Animated.View style={[styles.animatedLine, animatedLineStyle]} />
+        </View>
       )}
+      <View style={styles.insideComponentStyle}>{insideComponent}</View>
+      <View style={styles.captionContainerStyle}>
+        {typeof caption === 'string' && (
+          <Text style={styles.captionText}>{caption}</Text>
+        )}
+        {typeof caption !== 'string' && caption}
+      </View>
     </View>
   );
 };
@@ -180,13 +200,34 @@ export default Rectangle;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
+    zIndex: 1,
+  },
+  animatedLineContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 1,
+    flex: 1,
   },
   animatedLine: {
     position: 'absolute',
     elevation: 4,
     zIndex: 0,
+    backgroundColor: 'yellow',
+  },
+  insideComponentStyle: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    opacity: 0.5,
+  },
+  captionContainerStyle: {
+    position: 'absolute',
+    bottom: -40,
+    width: '100%',
+  },
+  captionText: {
+    color: '#fff',
+    textAlign: 'center',
   },
 });

@@ -10,6 +10,7 @@ interface Props {
   color?: string | OpaqueColorValue;
   radius?: number;
   borderWidth?: number;
+  isInside?: boolean;
 }
 
 const Edge: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const Edge: React.FC<Props> = ({
   color = 'red',
   radius = 0,
   borderWidth = 10,
+  isInside = true,
 }) => {
   const keys: string[] = position.split('-');
   const defaultStyle: ViewStyle = {
@@ -31,8 +33,8 @@ const Edge: React.FC<Props> = ({
     [`border${keys[0]}Width`]: borderWidth,
     [`border${keys[1]}Width`]: borderWidth,
     [`border${keys.join('')}Radius`]: radius,
-    [`${keys[0].toLocaleLowerCase()}`]: -borderWidth,
-    [`${keys[1].toLocaleLowerCase()}`]: -borderWidth,
+    [`${keys[0].toLocaleLowerCase()}`]: isInside ? 0 : -borderWidth,
+    [`${keys[1].toLocaleLowerCase()}`]: isInside ? 0 : -borderWidth,
   };
 
   return <View style={StyleSheet.flatten([defaultStyle, edgeBorderStyle])} />;

@@ -20,25 +20,31 @@ interface Props {
   animatedLineColor?: string | OpaqueColorValue;
   animatedLineWidth?: number;
   padding?: number;
+  caption?: string | React.Component | React.ReactElement;
+  insideComponent?: React.Component | React.ReactElement;
+  edgeInside?: boolean;
 }
 
 const CameraMask: React.FC<Props> = ({
+  insideComponent,
   width = 300,
   height = 200,
-  center = false,
-  top = 100,
+  center = true,
+  top = 200,
   maskOpacity = 0.5,
   maskColor = 'pink',
   edgeBorderWidth = 10,
-  edgeRadius = 10,
+  edgeRadius = 0,
   edgeWidth = 30,
   edgeHeight = 35,
   edgeColor = 'red',
-  orientation = 'vertical',
+  orientation = 'horizontal',
   animatedLineDuration = 1000,
   animatedLineColor = 'green',
   animatedLineWidth = 5,
   padding = 40,
+  caption,
+  edgeInside = false,
 }) => {
   return (
     <View style={styles.container}>
@@ -57,6 +63,9 @@ const CameraMask: React.FC<Props> = ({
         animatedLineColor={animatedLineColor}
         animatedLineWidth={animatedLineWidth}
         padding={padding}
+        insideComponent={insideComponent}
+        caption={caption}
+        edgeInside={edgeInside}
       />
       <Mask
         height={height}
