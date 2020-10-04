@@ -32,7 +32,7 @@ const DiscoverScreen: React.FC = () => {
           name="qr-code-outline"
           size={25}
           color="black"
-          onPress={() => navigation.navigate('QRScan')}
+          onPress={() => navigation.navigate('QRScanScreen')}
         />
       </Header>
     </Container>

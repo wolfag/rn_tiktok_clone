@@ -12,7 +12,7 @@ import PlusButton from '../components/PlusButton';
 import InboxScreen from '../screens/Inbox';
 import MeScreen from '../screens/Me';
 import QRScanScreen from '../screens/QRScan';
-import CameraMask from '../components/CameraMask';
+import MyTikCode from '../screens/MyTikCode';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -68,7 +68,7 @@ const AppRoutes: React.FC = () => {
         listeners={({navigation}) => ({
           tabPress: (e) => {
             e.preventDefault();
-            navigation.navigate('Record');
+            navigation.navigate('RecordScreen');
           },
         })}
         options={{
@@ -106,19 +106,19 @@ const AppRoutes: React.FC = () => {
 
 const RootStackScreen: React.FC = () => {
   return (
-    <Stack.Navigator mode="card" initialRouteName="Mask">
+    <Stack.Navigator mode="card" initialRouteName="MainScreen">
       <Stack.Screen
-        name="Main"
+        name="MainScreen"
         component={AppRoutes}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Record"
+        name="RecordScreen"
         component={RecordScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="QRScan" component={QRScanScreen} />
-      <Stack.Screen name="Mask" component={CameraMask} />
+      <Stack.Screen name="QRScanScreen" component={QRScanScreen} />
+      <Stack.Screen name="MyTickCodeScreen" component={MyTikCode} />
     </Stack.Navigator>
   );
 };
