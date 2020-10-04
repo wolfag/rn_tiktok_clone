@@ -13,6 +13,7 @@ import InboxScreen from '../screens/Inbox';
 import MeScreen from '../screens/Me';
 import QRScanScreen from '../screens/QRScan';
 import MyTikCode from '../screens/MyTikCode';
+import Setting from '../screens/Setting';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -119,6 +120,7 @@ const RootStackScreen: React.FC = () => {
       />
       <Stack.Screen name="QRScanScreen" component={QRScanScreen} />
       <Stack.Screen name="MyTickCodeScreen" component={MyTikCode} />
+      <Stack.Screen name="SettingScreen" component={Setting} />
     </Stack.Navigator>
   );
 };

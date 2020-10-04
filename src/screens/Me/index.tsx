@@ -1,8 +1,9 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import avatar from '../../assets/avatar.png';
 import {Container} from '../commonStyles';
 import {
@@ -20,28 +21,31 @@ import {
   StatsText,
   Title,
   Username,
+  HeaderButton,
 } from './styles';
+import MeTabs from './tabs';
+import {useNavigation} from '@react-navigation/native';
 
 const MeScreen: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <Container color="#fff">
       <Header>
-        <AntDesign
-          name="adduser"
-          size={24}
-          color="black"
-          style={styles.addUser}
-        />
-        <Title>Wolfag</Title>
-        <MaterialIcons name="arrow-drop-down" size={24} color="black" />
-        <FontAwesome
-          name="ellipsis-v"
-          size={24}
-          color="black"
+        <HeaderButton style={styles.addUser}>
+          <AntDesign name="adduser" size={24} color="black" />
+        </HeaderButton>
+        <HeaderButton>
+          <Title>Wolfag</Title>
+          <MaterialIcons name="arrow-drop-down" size={24} color="black" />
+        </HeaderButton>
+        <HeaderButton
           style={styles.threeDot}
-        />
+          onPress={() => navigation.navigate('SettingScreen')}>
+          <FontAwesome name="ellipsis-v" size={24} color="black" />
+        </HeaderButton>
       </Header>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Content>
           <Avatar source={avatar} />
           <Username>@wolfag</Username>
@@ -67,7 +71,9 @@ const MeScreen: React.FC = () => {
             </ProfileEdit>
             <Bookmark name="bookmark" size={24} color="black" />
           </ProfileColumn>
-          <StatsText>Tap to add bio</StatsText>
+          <View style={{flex: 1}}>
+            <MeTabs />
+          </View>
         </Content>
       </ScrollView>
     </Container>

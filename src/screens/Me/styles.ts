@@ -8,6 +8,12 @@ export const Header = styled.View`
   justify-content: center;
   border-bottom-width: 0.5px;
   border-bottom-color: #dadada;
+  position: relative;
+`;
+
+export const HeaderButton = styled.TouchableOpacity`
+  flex-direction: row;
+  padding: 0 10px;
 `;
 
 export const Title = styled.Text`
