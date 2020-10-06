@@ -4,7 +4,7 @@ import {View, Text} from 'react-native';
 const LikeVideosTab: React.FC = () => {
   return (
     <View style={{flex: 1}}>
-      <Text>my</Text>
+      <Text>LikeVideosTab</Text>
     </View>
   );
 };

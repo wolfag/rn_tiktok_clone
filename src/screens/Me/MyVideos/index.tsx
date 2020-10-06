@@ -4,7 +4,7 @@ import {View, Text} from 'react-native';
 const MyVideosTab: React.FC = () => {
   return (
     <View style={{flex: 1}}>
-      <Text>my</Text>
+      <Text>MyVideosTab</Text>
     </View>
   );
 };
